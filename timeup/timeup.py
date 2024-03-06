@@ -8,11 +8,20 @@ class Task:
 
     def complete(self):
         self.completed = True
+    
+    def __eq__(self, other):
+        return (
+            isinstance(other, Task) and
+            self.title == other.title and
+            self.priority == other.priority and
+            self.completed == other.completed
+        )
 
 class TaskManager:
     def __init__(self):
         self.tasks = []
 
+    
     def add_task(self, title, priority):
         task = Task(title, priority)
         self.tasks.append(task)

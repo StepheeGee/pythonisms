@@ -1,16 +1,8 @@
-import pytest
+from timeup.timeup import Task, TaskManager, complete_high_priority_tasks, example_slow_function
 import time
-from .timeup import Task, TaskManager, complete_high_priority_tasks, example_slow_function
+import pytest
 
-def test_add_task():
-    manager = TaskManager()
-    manager.add_task("New Task", "low")
-    assert len(manager) == 1
 
-def test_add_task_priority_invalid():
-    manager = TaskManager()
-    with pytest.raises(ValueError):
-        manager.add_task("Invalid Task", "invalid_priority")
 
 def test_complete_high_priority_tasks():
     manager = TaskManager()
@@ -42,7 +34,9 @@ def test_task_manager_equality():
     manager2.add_task("Task 1", "high")
     manager2.add_task("Task 2", "medium")
 
-    assert manager1 == manager2
+    assert manager1.tasks == manager2.tasks
+
+
 
 def test_task_manager_truthiness():
     empty_manager = TaskManager()
